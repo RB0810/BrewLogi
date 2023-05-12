@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "616760124457",
+    "firebase_url": "https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "hacksingapore-14b13",
+    "storage_bucket": "hacksingapore-14b13.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616760124457:android:3adbfc3ec93243a3b36838",
+        "android_client_info": {
+          "package_name": "com.example.brewlogi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616760124457-gorpvu6umgk5s27doqj7ofgfkp7pqi58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIRyULlLnZ7qYYXdrU5nyUJw7sfMgurwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616760124457-gorpvu6umgk5s27doqj7ofgfkp7pqi58.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
