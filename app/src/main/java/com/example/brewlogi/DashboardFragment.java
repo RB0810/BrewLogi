@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class DashboardFragment extends Fragment {
 
-    DatabaseReference roomTypeRef = FirebaseDatabase.getInstance("https://console.firebase.google.com/u/0/project/hacksingapore-14b13/database/hacksingapore-14b13-default-rtdb/data/~2F")
+    DatabaseReference roomTypeRef = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("Stall A");
 
     @Override
