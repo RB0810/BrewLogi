@@ -3,20 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AlertFragment">
+    tools:context=".AlertFragment"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
 
-    <LinearLayout
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        tools:listitem="@layout/rv_alert"/>
 
-        <TextView
-            android:id="@+id/alert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="Alert"/>
 
-    </LinearLayout>
 
 </FrameLayout>
