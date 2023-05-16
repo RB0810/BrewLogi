@@ -26,6 +26,7 @@ import com.onesignal.OSNotificationReceivedEvent;
 import com.onesignal.OneSignal;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AlertFragment extends Fragment {
     private TextView alert;
@@ -66,30 +67,42 @@ public class AlertFragment extends Fragment {
         }); */
         DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Inventory");
+
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> updatedAlerts = new ArrayList<>();
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String stall = dataSnapshot.getKey();
+
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         String product = dataSnapshot1.getKey();
+
                         DataSnapshot dataSnapshot2 = dataSnapshot1.child("Cans left");
                         Integer cansLeft = dataSnapshot2.getValue(Integer.class);
+
                         if (cansLeft < alertNumber) {
                             String alert = stall + ", " + product + " is low on stock";
-                            if (!alertText.contains(alert)) {
-                                //Toast.makeText(rootview.getContext(), alert, Toast.LENGTH_LONG).show();
-                                alertText.add(alert);
-                                adapter_alert.notifyDataSetChanged();
-                            }
-                        } else {
-                            String alert = stall + ", " + product + " is low on stock";
-                            if (alertText.contains(alert)) {
-                                alertText.remove(alert);
-                            }
+                            updatedAlerts.add(alert);
                         }
                     }
                 }
+
+                // Remove alerts that are no longer present in the database
+                List<String> alertsToRemove = new ArrayList<>(alertText);
+                alertsToRemove.removeAll(updatedAlerts);
+                alertText.removeAll(alertsToRemove);
+
+                // Add new alerts that are not already in the list
+                for (String alert : updatedAlerts) {
+                    if (!alertText.contains(alert)) {
+                        alertText.add(alert);
+                    }
+                }
+
+                // Update the adapter
+                adapter_alert.notifyDataSetChanged();
             }
 
             @Override
@@ -97,6 +110,8 @@ public class AlertFragment extends Fragment {
 
             }
         });
+
+
 
         return rootview;
     }
