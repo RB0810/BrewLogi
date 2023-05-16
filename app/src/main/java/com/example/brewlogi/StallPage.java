@@ -28,6 +28,8 @@ public class StallPage extends AppCompatActivity {
         String stallName = intent.getStringExtra("stallName");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_stall);
+        TextView stallname = findViewById(R.id.stall_name);
+        stallname.setText(stallName.toUpperCase());
 
         DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Inventory").child(stallName);
