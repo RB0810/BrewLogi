@@ -81,10 +81,11 @@ public class AlertFragment extends Fragment {
 
                         DataSnapshot dataSnapshot2 = dataSnapshot1.child("Cans left");
                         Integer cansLeft = dataSnapshot2.getValue(Integer.class);
-
-                        if (cansLeft < alertNumber) {
-                            String alert = stall + ", " + product + " is low on stock";
-                            updatedAlerts.add(alert);
+                        if(cansLeft != null) {
+                            if (cansLeft < alertNumber) {
+                                String alert = stall + ", " + product + " is low on stock";
+                                updatedAlerts.add(alert);
+                            }
                         }
                     }
                 }
