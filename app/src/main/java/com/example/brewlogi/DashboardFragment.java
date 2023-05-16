@@ -39,11 +39,14 @@ public class DashboardFragment extends Fragment {
         recyclerView.setAdapter(adapterDashboard);
 
         database.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     String stall = dataSnapshot.getKey();
-                    list.add(stall);
+                    if(!list.contains(stall)) {
+                        list.add(stall);
+                    }
                 }
                 adapterDashboard.notifyDataSetChanged();
             }

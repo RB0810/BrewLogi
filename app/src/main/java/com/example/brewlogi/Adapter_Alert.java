@@ -32,7 +32,7 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull Adapter_Alert.MyViewHolder holder, int position) {
         String alert = list.get(position);
-        holder.alert.setText(alert.toUpperCase());
+        holder.alert.setText(alert);
 
     }
 

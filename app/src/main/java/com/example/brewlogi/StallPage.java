@@ -36,9 +36,10 @@ public class StallPage extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ArrayList<Product> list = new ArrayList<>();
-        Adapter_Stall adapterStall = new Adapter_Stall(this, list);
+        Adapter_Stall adapterStall = new Adapter_Stall(this, list, stallName);
         recyclerView.setAdapter(adapterStall);
 
+        ArrayList<String> repeat = new ArrayList<>();
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -51,8 +52,11 @@ public class StallPage extends AppCompatActivity {
                     DataSnapshot cansLeftSnapshot = dataSnapshot.child("Cans left");
                     String cansLeft = "Cans Left: " + cansLeftSnapshot.getValue(Integer.class).toString();
 
-                    list.add(new Product(product, cansDist, cansLeft));
-
+                    Product beer = new Product(product, cansDist, cansLeft);
+                    if(!repeat.contains(beer.getProductName())){
+                        list.add(beer);
+                        repeat.add(beer.getProductName());
+                    }
                 }
                 adapterStall.notifyDataSetChanged();
             }

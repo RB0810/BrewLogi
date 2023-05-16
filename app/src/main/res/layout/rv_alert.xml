@@ -4,10 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="30dp">
 
-
     <TextView
         android:id="@+id/alert"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:textColor="@color/black"
         android:text="Alert" />
+
 </RelativeLayout>

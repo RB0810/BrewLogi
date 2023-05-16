@@ -5,12 +5,17 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -47,6 +52,17 @@ public class Adapter_Dashboard extends RecyclerView.Adapter<Adapter_Dashboard.My
             }
         });
 
+        holder.Remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String stall = list.get(position);
+                list.remove(position);
+                DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        .getReference("Inventory").child(stall);
+                database.removeValue();
+            }
+        });
+
     }
 
     @Override
@@ -58,6 +74,7 @@ public class Adapter_Dashboard extends RecyclerView.Adapter<Adapter_Dashboard.My
 
         TextView StallName;
         CardView ParentCard;
+        ImageButton Remove;
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -65,6 +82,7 @@ public class Adapter_Dashboard extends RecyclerView.Adapter<Adapter_Dashboard.My
 
             StallName = itemView.findViewById(R.id.stallname);
             ParentCard = itemView.findViewById(R.id.parentCard);
+            Remove = itemView.findViewById(R.id.remove_stall);
         }
     }
 }
