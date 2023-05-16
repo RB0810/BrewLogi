@@ -46,7 +46,6 @@ public class DashboardFragment extends Fragment {
                     list.add(stall);
                 }
                 adapterDashboard.notifyDataSetChanged();
-                System.out.println(list);
             }
 
 

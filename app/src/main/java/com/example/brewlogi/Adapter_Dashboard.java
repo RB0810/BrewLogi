@@ -34,7 +34,7 @@ public class Adapter_Dashboard extends RecyclerView.Adapter<Adapter_Dashboard.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         String stall = list.get(position);
-        holder.StallName.setText(stall);
+        holder.StallName.setText(stall.toUpperCase());
 
         // Inside your RecyclerView adapter's onBindViewHolder() method
         holder.ParentCard.setOnClickListener(new View.OnClickListener() {
