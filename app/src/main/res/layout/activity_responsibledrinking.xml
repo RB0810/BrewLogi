@@ -29,7 +29,47 @@
         android:fontFamily="@font/inter_regular"
         android:textSize="14dp"
         android:textColor="@color/black"
-        android:text="@string/responsible_drink" />
+        android:text="@string/rd1" />
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:text="@string/rd2" />
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:text="@string/rd3" />
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:text="@string/rd4" />
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:text="@string/rd5" />
 
     <CheckBox
         android:id="@+id/checkBox1"

@@ -2,5 +2,9 @@
     <string name="app_name">BrewLogi</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="responsible_drink">At BrewLogi, we prioritize responsible drinking for a safer and more enjoyable experience. Embrace moderation, knowing your limits and pacing yourself. Familiarize yourself with alcohol content and serving sizes. Stay hydrated by drinking water alongside alcohol. Be a responsible friend, intervening if needed. Ensure you are above the legal drinking age of 18. By adhering to these principles, you contribute to a healthier community. Enjoy your drinks responsibly at BrewLogi, where we promote personal safety and well-being.</string>
+    <string name="rd1">At BrewLogi, we believe in fostering responsible drinking habits for a safer and more enjoyable experience. Here are additional principles to guide you:</string>
+    <string name="rd2">Make informed choices by understanding the effects of alcohol on your body and mind. Educate yourself about the potential risks and consequences of excessive consumption, ensuring you have the knowledge to make responsible decisions.</string>
+    <string name="rd3">Prioritize self-care and well-being. Take breaks between drinks to allow your body to metabolize alcohol effectively. Listen to your body and recognize when it is time to slow down or stop. Remember, your health and safety come first.</string>
+    <string name="rd4">Support a positive drinking culture by promoting responsible behavior among your peers. Encourage open conversations about moderation and responsible consumption. Be a role model and actively discourage binge drinking or excessive alcohol intake.</string>
+    <string name="rd5">By embracing these principles and actively promoting responsible drinking, you contribute to a healthier and more enjoyable social environment. Cheers to a safer and more enjoyable drinking experience!</string>
 </resources>
