@@ -28,6 +28,9 @@
             android:name=".PlaceOrder"
             android:exported="false" />
         <activity
+            android:name=".ResponsibleDrinking"
+            android:exported="false" />
+        <activity
             android:name=".Organiser"
             android:exported="false" />
     </application>

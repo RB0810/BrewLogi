@@ -77,17 +77,6 @@ public class StallPage extends AppCompatActivity {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String lastUpdatedTimestamp = String.valueOf(System.currentTimeMillis());
-
-                // Convert the timestamp to your desired format
-                // For example, you can use SimpleDateFormat to format the timestamp
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String lastUpdatedDate = sdf.format(new Date(Long.parseLong(lastUpdatedTimestamp)));
-
-                // Set the last updated date and time on the TextView
-
-                TextView lastUpdated = findViewById(R.id.lastupdated);
-                lastUpdated.setText("Last Updated: " + lastUpdatedDate);
                 productList.clear();
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {

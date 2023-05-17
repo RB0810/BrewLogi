@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, PlaceOrder.class);
+                Intent intent = new Intent(MainActivity.this, ResponsibleDrinking.class);
                 startActivity(intent);
             }
         });

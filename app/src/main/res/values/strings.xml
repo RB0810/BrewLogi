@@ -2,4 +2,5 @@
     <string name="app_name">BrewLogi</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="responsible_drink">At BrewLogi, we prioritize responsible drinking for a safer and more enjoyable experience. Embrace moderation, knowing your limits and pacing yourself. Familiarize yourself with alcohol content and serving sizes. Stay hydrated by drinking water alongside alcohol. Be a responsible friend, intervening if needed. Ensure you are above the legal drinking age of 18. By adhering to these principles, you contribute to a healthier community. Enjoy your drinks responsibly at BrewLogi, where we promote personal safety and well-being.</string>
 </resources>
