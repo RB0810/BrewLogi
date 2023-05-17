@@ -31,6 +31,9 @@
             android:name=".ResponsibleDrinking"
             android:exported="false" />
         <activity
+            android:name=".LoginOrganiser"
+            android:exported="false" />
+        <activity
             android:name=".Organiser"
             android:exported="false" />
     </application>

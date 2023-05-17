@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LoginOrganiser">
+
+    <include layout="@layout/toolbar" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Login"
+        android:layout_gravity="center"
+        android:textSize="24dp"
+        android:textColor="@color/heineken_green"
+        android:fontFamily="@font/inter_extrabold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:text="Please login to your organiser account."
+        android:layout_gravity="center"
+        android:textSize="14dp"
+        android:textColor="@color/heineken_green"
+        android:fontFamily="@font/inter_regular"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:text="If you dont have an account yet, contact admin."
+        android:layout_gravity="center"
+        android:textSize="14dp"
+        android:textColor="@color/heineken_green"
+        android:fontFamily="@font/inter_regular"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="10dp"
+        android:textColor="@color/heineken_green"
+        android:fontFamily="@font/inter_regular"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:hint="Email"
+        android:textColor="@color/black"
+        android:textColorHint="@color/silver"
+        android:id="@+id/login"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:textColor="@color/black"
+        android:hint="Password"
+        android:textColorHint="@color/silver"
+        android:id="@+id/password"/>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:id="@+id/loginbutton"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/roundedgreen"
+        android:fontFamily="@font/inter_medium"
+        android:text="Login"
+        android:textColor="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use these credentials to login (to view the rest of the app)"
+            android:textSize="10dp"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/heineken_green"
+            android:fontFamily="@font/inter_regular"
+            android:layout_alignParentRight="true"
+            android:layout_above="@id/textView2"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email: brewlogimanager@gmail.com"
+            android:textSize="10dp"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/heineken_green"
+            android:fontFamily="@font/inter_regular"
+            android:layout_alignParentRight="true"
+            android:layout_above="@+id/textView3"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="Password: brewlogi"
+            android:textSize="10dp"
+            android:textColor="@color/heineken_green"
+            android:fontFamily="@font/inter_regular"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
