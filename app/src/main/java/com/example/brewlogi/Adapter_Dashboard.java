@@ -60,6 +60,9 @@ public class Adapter_Dashboard extends RecyclerView.Adapter<Adapter_Dashboard.My
                 DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
                         .getReference("Inventory").child(stall);
                 database.removeValue();
+                DatabaseReference databasee = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        .getReference("Location").child(stall);
+                databasee.removeValue();
             }
         });
 

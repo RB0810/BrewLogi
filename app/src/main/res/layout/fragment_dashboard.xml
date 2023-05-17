@@ -6,12 +6,9 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,27 +21,31 @@
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/rv_dashboard" />
 
-            <ImageButton
-                android:id="@+id/add_button_stall"
-                android:layout_width="wrap_content"
-                android:layout_height="90dp"
-                android:src="@drawable/add_button"
-                android:layout_gravity="center"
-                android:background="@color/white" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Add New Stall"
-                android:textColor="@color/black"
-                android:fontFamily="@font/inter_regular"
-                android:textSize="16dp"/>
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/add_button_stall"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:src="@drawable/add_button"
+                    android:background="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Add New Stall"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_regular"
+                    android:textSize="16dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </ScrollView>
-
-
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>
