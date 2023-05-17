@@ -75,6 +75,7 @@
         android:layout_marginRight="15dp"
         android:textColor="@color/black"
         android:hint="Password"
+        android:inputType="textPassword"
         android:textColorHint="@color/silver"
         android:id="@+id/password"/>
 
