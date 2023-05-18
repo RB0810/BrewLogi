@@ -7,10 +7,23 @@ public class Product {
     String cansDistributed;
     String cansLeft;
 
+    int cost;
+
+    int imageResource;
+
     public Product(String productName, String cansDistributed, String cansLeft) {
         this.productName = productName;
         this.cansDistributed = cansDistributed;
         this.cansLeft = cansLeft;
+
+    }
+
+    public Product(String productName, String cansDistributed, String cansLeft, int cost, int imageResource){
+        this.productName = productName;
+        this.cansDistributed = cansDistributed;
+        this.cansLeft = cansLeft;
+        this.cost = cost;
+        this.imageResource = imageResource;
     }
      Product(String productName, String stallname) {
         this.productName = productName;
@@ -31,5 +44,13 @@ public class Product {
 
     public String getCansLeft() {
         return cansLeft;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public int getImageResource() {
+        return imageResource;
     }
 }
