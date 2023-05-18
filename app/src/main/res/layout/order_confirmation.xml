@@ -81,6 +81,7 @@
         android:layout_gravity="center"
         android:textSize="60px"
         android:textColor="@color/black"
+        android:textStyle="bold"
 
         />
     <TextView
