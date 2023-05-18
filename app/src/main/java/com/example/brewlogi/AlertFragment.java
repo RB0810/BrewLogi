@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,9 @@ public class AlertFragment extends Fragment {
     RecyclerView recyclerView;
     Adapter_Alert adapter_alert;
     Integer alertNumber = 100;
-    ArrayList<String> alertText = new ArrayList<>();
+    Integer suggestedrestock = 150;
+    ArrayList<Product> alertText = new ArrayList<>();
+    Button restock;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -47,7 +50,10 @@ public class AlertFragment extends Fragment {
         recyclerView = rootview.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(rootview.getContext()));
         adapter_alert = new Adapter_Alert(rootview.getContext(), alertText);
+       // restock = (Button) rootview.findViewById(R.id.restock);
         recyclerView.setAdapter(adapter_alert);
+
+
 
        /* OneSignal.setNotificationWillShowInForegroundHandler(new OneSignal.OSNotificationWillShowInForegroundHandler() {
             @Override
@@ -71,7 +77,8 @@ public class AlertFragment extends Fragment {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<String> updatedAlerts = new ArrayList<>();
+                List<Product> updatedAlerts = new ArrayList<>();
+                List<Product> restock = new ArrayList<>();
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String stall = dataSnapshot.getKey();
@@ -84,26 +91,30 @@ public class AlertFragment extends Fragment {
                         if(cansLeft != null) {
                             if (cansLeft < alertNumber) {
                                 String alert = stall + ", " + product + " is low on stock";
-                                updatedAlerts.add(alert);
+                                restock.add(new Product(product, stall));
+                                updatedAlerts.add(new Product(product, stall));
+
                             }
                         }
                     }
                 }
 
                 // Remove alerts that are no longer present in the database
-                List<String> alertsToRemove = new ArrayList<>(alertText);
+                List<Product> alertsToRemove = new ArrayList<>(alertText);
                 alertsToRemove.removeAll(updatedAlerts);
                 alertText.removeAll(alertsToRemove);
 
                 // Add new alerts that are not already in the list
-                for (String alert : updatedAlerts) {
+                for (Product alert : updatedAlerts) {
                     if (!alertText.contains(alert)) {
                         alertText.add(alert);
+
                     }
                 }
 
                 // Update the adapter
                 adapter_alert.notifyDataSetChanged();
+
             }
 
             @Override
@@ -117,7 +128,8 @@ public class AlertFragment extends Fragment {
         return rootview;
     }
 
-    }
+
+}
 
 
 

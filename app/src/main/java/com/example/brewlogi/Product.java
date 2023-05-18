@@ -1,6 +1,7 @@
 package com.example.brewlogi;
 
 public class Product {
+    String stallname;
 
     String productName;
     String cansDistributed;
@@ -10,6 +11,14 @@ public class Product {
         this.productName = productName;
         this.cansDistributed = cansDistributed;
         this.cansLeft = cansLeft;
+    }
+     Product(String productName, String stallname) {
+        this.productName = productName;
+        this.stallname=stallname;
+    }
+
+    public String getStallname() {
+        return stallname;
     }
 
     public String getProductName() {
