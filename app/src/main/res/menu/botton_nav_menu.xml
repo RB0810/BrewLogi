@@ -9,10 +9,6 @@
         android:title="Alert"
         android:icon="@drawable/alert" />
 
-    <item android:id="@+id/distribution"
-        android:title="Distribution"
-        android:icon="@drawable/trolley"/>
-
     <item android:id="@+id/chart"
         android:title="Performance"
         android:icon="@drawable/chart"/>

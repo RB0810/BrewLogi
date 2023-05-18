@@ -15,7 +15,6 @@ public class Organiser extends AppCompatActivity {
 
     DashboardFragment dashboardFragment = new DashboardFragment();
     AlertFragment alertFragment = new AlertFragment();
-    DistributionFragment distributionFragment = new DistributionFragment();
 
     ChartFragment chartFragment = new ChartFragment();
     @Override
@@ -33,14 +32,12 @@ public class Organiser extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.dashboard:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,dashboardFragment).commit();
-
                         return true;
+
                     case R.id.alert:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,alertFragment).commit();
                         return true;
-                    case R.id.distribution:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,distributionFragment).commit();
-                        return true;
+
                     case R.id.chart:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,chartFragment).commit();
                         return true;

@@ -6,35 +6,35 @@
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:background="@drawable/notifbg">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/alert"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="30dp"
-        android:backgroundTint="#ff0000"
         android:fontFamily="@font/inter_extrabold"
         android:textSize="20dp"
         android:text="Alert"
         android:textColor="#ff0000" />
+
     <TextView
-        android:layout_width="240dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="40dp"
         android:layout_marginRight="10dp"
-        android:backgroundTint="#c0c0c0"
         android:fontFamily="@font/inter_medium"
         android:text="Suggested Restock:"
         android:textSize="20dp"
         android:textColor="@color/black" />
+
     <TextView
         android:id="@+id/restocknumber"
-        android:layout_width="240dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="210dp"
         android:layout_marginTop="40dp"
         android:layout_marginRight="50dp"
@@ -43,16 +43,34 @@
         android:textSize="20dp"
         android:text="100"
         android:textColor="@color/black" />
-    <Button
-        android:id="@+id/restock"
-        android:text="Restock"
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-       android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="66dp"
         android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/roundedrect"
-        />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/restockText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restock"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <Switch
+            android:id="@+id/restock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/toggle_button_selector"
+            android:checked="false"
+            android:textOff=""
+            android:textOn="" />
+
+    </LinearLayout>
+
 
 </RelativeLayout>

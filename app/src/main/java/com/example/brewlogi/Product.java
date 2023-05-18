@@ -7,6 +7,7 @@ public class Product {
     String cansDistributed;
     String cansLeft;
 
+    Boolean isRestocked;
     int cost;
 
     int imageResource;
@@ -25,9 +26,10 @@ public class Product {
         this.cost = cost;
         this.imageResource = imageResource;
     }
-     Product(String productName, String stallname) {
+     Product(String productName, String stallname, Boolean isRestocked) {
         this.productName = productName;
         this.stallname=stallname;
+        this.isRestocked=isRestocked;
     }
 
     public String getStallname() {
@@ -52,5 +54,13 @@ public class Product {
 
     public int getImageResource() {
         return imageResource;
+    }
+
+    public Boolean getRestocked() {
+        return isRestocked;
+    }
+
+    public void setRestocked(Boolean restocked) {
+        isRestocked = restocked;
     }
 }

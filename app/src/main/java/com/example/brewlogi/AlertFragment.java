@@ -88,8 +88,8 @@ public class AlertFragment extends Fragment {
                         if(cansLeft != null) {
                             if (cansLeft < alertNumber) {
                                 String alert = stall + ", " + product + " is low on stock";
-                                restock.add(new Product(product, stall));
-                                updatedAlerts.add(new Product(product, stall));
+                                restock.add(new Product(product, stall, false));
+                                updatedAlerts.add(new Product(product, stall, false));
 
                             }
                         }

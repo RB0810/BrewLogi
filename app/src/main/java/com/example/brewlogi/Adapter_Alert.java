@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +27,7 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
 
     Context context;
     ArrayList<Product> list;
-    Integer var =150;
+    int var = 150;
 
     public Adapter_Alert(Context context, ArrayList<Product> list) {
         this.context = context;
@@ -40,41 +43,63 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
 
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter_Alert.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Product prod1 = list.get(position);
         String stall = prod1.getStallname();
         String prod = prod1.getProductName();
         holder.alert.setText(stall+" "+prod+" is low on stock");
-        holder.restock.setOnClickListener(new View.OnClickListener() {
+        holder.restockno.setText(String.valueOf(var));
+
+        holder.restock.setOnCheckedChangeListener(null); // Remove previous listener before setting the state
+
+        // Set the toggle state based on the isRestocked field of the Product
+        holder.restock.setChecked(prod1.getRestocked());
+
+        holder.restock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                Product product = list.get(position);
-                String stall = product.getStallname();
-                String prod = product.getProductName();
-                 DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                  .getReference("Inventory").child(stall).child(prod);
-                 database.addListenerForSingleValueEvent(new ValueEventListener() {
-                     @Override
-                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                         DataSnapshot dataSnapshot = snapshot.child("Cans left");
-                         Integer cans = dataSnapshot.getValue(Integer.class);
-                         cans=cans+var;
-                         database.child("Cans left").setValue(cans);
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                    prod1.setRestocked(isChecked);
+                    Product product = list.get(position);
+                    String stall = product.getStallname();
+                    String prod = product.getProductName();
+                    DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                            .getReference("Inventory").child(stall).child(prod);
+                    database.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            DataSnapshot dataSnapshot = snapshot.child("Cans left");
+                            Integer cans = dataSnapshot.getValue(Integer.class);
+                            cans=cans+var;
+                            database.child("Cans left").setValue(cans);
 
-                     }
+                        }
 
-                     @Override
-                     public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                     }
-                 });
+                        }
+                    });
 
+                    DatabaseReference database2 = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                            .getReference("Inventory").child("Total Stock").child(prod);
+                    database2.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            DataSnapshot dataSnapshot = snapshot.child("Cans distributed");
+                            Integer cans = dataSnapshot.getValue(Integer.class);
+                            cans=cans-var;
+                            database2.child("Cans distributed").setValue(cans);
 
-                holder.restockno.setText(var.toString());
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
             }
         });
-
-
 
     }
 
@@ -85,7 +110,7 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-         Button restock;
+        Switch restock;
         TextView alert;
         TextView restockno;
 
