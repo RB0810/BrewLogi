@@ -4,7 +4,10 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +40,10 @@ public class OrderConfirmation extends AppCompatActivity {
     private int numberValue;
 
     private Boolean database2Updated = false;
+    private double nearestStallLatitude;
+    private double nearestStallLongitude;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,15 @@ public class OrderConfirmation extends AppCompatActivity {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         startLocationUpdates();
+        Button viewLocationButton = findViewById(R.id.viewlocation);
+        viewLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGoogleMaps();
+            }
+        });
+
+
     }
 
     private void startLocationUpdates() {
@@ -72,6 +88,7 @@ public class OrderConfirmation extends AppCompatActivity {
                     // Location is null, handle the error
                     Toast.makeText(OrderConfirmation.this, "Failed to get current location", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
@@ -113,6 +130,7 @@ public class OrderConfirmation extends AppCompatActivity {
                 double minDistance = Double.MAX_VALUE;
                 String nearestStall = "";
 
+
                 for (DataSnapshot stallSnapshot : dataSnapshot.getChildren()) {
                     String stallName = stallSnapshot.getKey();
                     double stallLatitude = stallSnapshot.child("Latitude").getValue(Double.class);
@@ -125,6 +143,10 @@ public class OrderConfirmation extends AppCompatActivity {
                     if (distance < minDistance) {
                         minDistance = distance;
                         nearestStall = stallName;
+                        nearestStallLatitude = stallLatitude;
+                        nearestStallLongitude = stallLongitude;
+
+
                     }
                 }
 
@@ -200,4 +222,17 @@ public class OrderConfirmation extends AppCompatActivity {
         // Stop location updates when the activity is destroyed
         stopLocationUpdates();
     }
+    private void openGoogleMaps() {
+        String userLocation = "geo:" + nearestStallLatitude + "," + nearestStallLongitude;
+        String nearestStallLocation = "geo:" + nearestStallLatitude + "," + nearestStallLongitude + "?q=" + locationTextView.getText().toString();
+
+        Uri userUri = Uri.parse(userLocation);
+        Uri nearestStallUri = Uri.parse(nearestStallLocation);
+
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=" + nearestStallLatitude + "," + nearestStallLongitude));
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
+    }
+
+
 }
