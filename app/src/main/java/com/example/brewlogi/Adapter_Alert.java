@@ -87,8 +87,12 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             DataSnapshot dataSnapshot = snapshot.child("Cans distributed");
                             Integer cans = dataSnapshot.getValue(Integer.class);
-                            cans=cans-var;
+                            cans = cans + var;
                             database2.child("Cans distributed").setValue(cans);
+                            DataSnapshot dataSnapshot1 = snapshot.child("Cans left");
+                            Integer cans1 = dataSnapshot1.getValue(Integer.class);
+                            cans1 = cans1 - var;
+                            database2.child("Cans left").setValue(cans1);
 
                         }
 
