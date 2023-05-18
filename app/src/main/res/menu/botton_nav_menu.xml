@@ -13,5 +13,9 @@
         android:title="Distribution"
         android:icon="@drawable/trolley"/>
 
+    <item android:id="@+id/chart"
+        android:title="Performance"
+        android:icon="@drawable/chart"/>
+
 
 </menu>
