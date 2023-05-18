@@ -46,12 +46,12 @@
     <Button
         android:id="@+id/restock"
         android:text="Restock"
-        android:layout_width="140dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
        android:gravity="center"
         android:layout_marginTop="66dp"
-        android:layout_marginLeft="250dp"
         android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
         android:background="@drawable/roundedrect"
         />
 
