@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -47,18 +48,15 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
         Product prod1 = list.get(position);
         String stall = prod1.getStallname();
         String prod = prod1.getProductName();
-        holder.alert.setText(stall+" "+prod+" is low on stock");
+        holder.alert.setText(stall + " " + prod + " is low on stock");
         holder.restockno.setText(String.valueOf(var));
 
-        holder.restock.setOnCheckedChangeListener(null); // Remove previous listener before setting the state
-
-        // Set the toggle state based on the isRestocked field of the Product
-        holder.restock.setChecked(prod1.getRestocked());
-
-        holder.restock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.restockLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                    prod1.setRestocked(isChecked);
+            public void onClick(View v) {
+                boolean isChecked = !prod1.getRestocked();
+                prod1.setRestocked(isChecked);
+                holder.restockToggle.setChecked(isChecked);
                     Product product = list.get(position);
                     String stall = product.getStallname();
                     String prod = product.getProductName();
@@ -112,9 +110,10 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
         return list.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        Switch restock;
+        LinearLayout restockLayout;
+        ToggleButton restockToggle;
         TextView alert;
         TextView restockno;
 
@@ -122,7 +121,8 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
             super(itemView);
 
             alert = itemView.findViewById(R.id.alert);
-            restock = itemView.findViewById(R.id.restock);
+            restockLayout = itemView.findViewById(R.id.restock);
+            restockToggle = itemView.findViewById(R.id.restock);
             restockno = itemView.findViewById(R.id.restocknumber);
         }
     }
