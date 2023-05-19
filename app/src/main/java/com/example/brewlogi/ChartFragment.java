@@ -45,10 +45,10 @@ public class ChartFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_chart, container, false);
-        TextView total = rootView.findViewById(R.id.total);
 
         DatabaseReference totalStockRef = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Inventory").child("Total Stock");
+
 
         totalStockRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -79,30 +79,6 @@ public class ChartFragment extends Fragment {
 
         DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Inventory");
-
-        DatabaseReference databaset = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("Inventory").child("Total Stock");
-
-        databaset.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int cansDisttt = 0;
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    DataSnapshot dataSnapshot1 = dataSnapshot.child("Cans distributed");
-                    Integer cansDist = dataSnapshot1.getValue(Integer.class);
-                    if (cansDist != null) {
-                        cansDisttt += cansDist.intValue();
-                    }
-                }
-                total.setText("Total Cans Distributed: " + String.valueOf(cansDisttt)); // Set the text of the TextView with the value of cansDisttt
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         List<String> stallNames = new ArrayList<>();
         List<Integer> cansDistributed = new ArrayList<>();
@@ -184,6 +160,9 @@ public class ChartFragment extends Fragment {
         for (Integer can : cansDistributed) {
             totalCansDistributed += can;
         }
+        TextView total = getView().findViewById(R.id.total);
+        total.setText("Total Cans Sold: " + String.valueOf(totalCansDistributed));
+
 
 
         // Create a PieChart object

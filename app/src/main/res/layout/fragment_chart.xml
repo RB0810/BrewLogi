@@ -25,8 +25,8 @@
             android:id="@+id/total"
             android:fontFamily="@font/iowan_bold"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:textSize="18dp"/>
+            android:layout_marginBottom="30dp"
+            android:textSize="22dp"/>
 
 
         <com.github.mikephil.charting.charts.PieChart
@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Stall Sales Distribution"
+            android:text="Stall Sales Division"
             android:textColor="@color/black"
             android:fontFamily="@font/iowan_bold"
             android:layout_gravity="center"
@@ -58,7 +58,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Product Sales Distribution"
+            android:text="Total Stock - Product Distribution"
             android:textColor="@color/black"
             android:fontFamily="@font/iowan_bold"
             android:layout_gravity="center"
