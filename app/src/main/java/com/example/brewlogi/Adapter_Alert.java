@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -47,60 +48,55 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
         Product prod1 = list.get(position);
         String stall = prod1.getStallname();
         String prod = prod1.getProductName();
-        holder.alert.setText(stall+" "+prod+" is low on stock");
+        holder.alert.setText(stall + " " + prod + " is low on stock");
         holder.restockno.setText(String.valueOf(var));
 
-        holder.restock.setOnCheckedChangeListener(null); // Remove previous listener before setting the state
-
-        // Set the toggle state based on the isRestocked field of the Product
-        holder.restock.setChecked(prod1.getRestocked());
-
-        holder.restock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.restockLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                    prod1.setRestocked(isChecked);
-                    Product product = list.get(position);
-                    String stall = product.getStallname();
-                    String prod = product.getProductName();
-                    DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                            .getReference("Inventory").child(stall).child(prod);
-                    database.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            DataSnapshot dataSnapshot = snapshot.child("Cans left");
-                            Integer cans = dataSnapshot.getValue(Integer.class);
-                            cans=cans+var;
-                            database.child("Cans left").setValue(cans);
+            public void onClick(View v) {
 
-                        }
+                Product product = list.get(position);
+                String stall = product.getStallname();
+                String prod = product.getProductName();
+                DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        .getReference("Inventory").child(stall).child(prod);
+                database.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        DataSnapshot dataSnapshot = snapshot.child("Cans left");
+                        Integer cans = dataSnapshot.getValue(Integer.class);
+                        cans=cans+var;
+                        database.child("Cans left").setValue(cans);
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                    }
 
-                        }
-                    });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                    DatabaseReference database2 = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                            .getReference("Inventory").child("Total Stock").child(prod);
-                    database2.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            DataSnapshot dataSnapshot = snapshot.child("Cans distributed");
-                            Integer cans = dataSnapshot.getValue(Integer.class);
-                            cans = cans + var;
-                            database2.child("Cans distributed").setValue(cans);
-                            DataSnapshot dataSnapshot1 = snapshot.child("Cans left");
-                            Integer cans1 = dataSnapshot1.getValue(Integer.class);
-                            cans1 = cans1 - var;
-                            database2.child("Cans left").setValue(cans1);
+                    }
+                });
 
-                        }
+                DatabaseReference database2 = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        .getReference("Inventory").child("Total Stock").child(prod);
+                database2.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        DataSnapshot dataSnapshot = snapshot.child("Cans distributed");
+                        Integer cans = dataSnapshot.getValue(Integer.class);
+                        cans = cans + var;
+                        database2.child("Cans distributed").setValue(cans);
+                        DataSnapshot dataSnapshot1 = snapshot.child("Cans left");
+                        Integer cans1 = dataSnapshot1.getValue(Integer.class);
+                        cans1 = cans1 - var;
+                        database2.child("Cans left").setValue(cans1);
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                    }
 
-                        }
-                    });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
             }
         });
@@ -112,9 +108,10 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
         return list.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        Switch restock;
+        LinearLayout restockLayout;
+        ToggleButton restockToggle;
         TextView alert;
         TextView restockno;
 
@@ -122,11 +119,10 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
             super(itemView);
 
             alert = itemView.findViewById(R.id.alert);
-            restock = itemView.findViewById(R.id.restock);
+            restockLayout = itemView.findViewById(R.id.restock);
+
             restockno = itemView.findViewById(R.id.restocknumber);
         }
     }
 
 }
-
-
