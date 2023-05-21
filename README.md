@@ -1,6 +1,6 @@
 <h1>BrewLogi</h1>
 
-<img src="path_to_image/brewlogi_logo.png" alt="BrewLogi Logo">
+<img src="ic_launcher-playstore.png" alt="BrewLogi Logo">
 
 <h2>Project Summary</h2>
 
