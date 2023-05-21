@@ -1,6 +1,6 @@
 <h1>BrewLogi</h1>
 
-<img src="ic_launcher-playstore.png" alt="BrewLogi Logo">
+<img src="ic_launcher-playstore.png" alt="BrewLogi Logo" height = 100p width = 100px>
 
 <h2>Project Summary</h2>
 
