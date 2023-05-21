@@ -27,8 +27,8 @@ import java.util.List;
 public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHolder>{
 
     Context context;
-    ArrayList<Product> list;
-    int var = 150;
+    static ArrayList<Product> list;
+
 
     public Adapter_Alert(Context context, ArrayList<Product> list) {
         this.context = context;
@@ -46,10 +46,13 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Product prod1 = list.get(position);
+        Opti opti = new Opti();
         String stall = prod1.getStallname();
         String prod = prod1.getProductName();
         holder.alert.setText(stall + " " + prod + " is low on stock");
-        holder.restockno.setText(String.valueOf(var));
+        holder.restockno.setText(String.valueOf(opti.getResult(stall, prod)));
+
+        opti.getResult(stall, prod);
 
         holder.restockLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +68,7 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         DataSnapshot dataSnapshot = snapshot.child("Cans left");
                         Integer cans = dataSnapshot.getValue(Integer.class);
-                        cans=cans+var;
+                        cans=cans+Opti.getResult(stall,prod);
                         database.child("Cans left").setValue(cans);
 
                     }
@@ -83,11 +86,11 @@ public class Adapter_Alert extends RecyclerView.Adapter<Adapter_Alert.MyViewHold
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         DataSnapshot dataSnapshot = snapshot.child("Cans distributed");
                         Integer cans = dataSnapshot.getValue(Integer.class);
-                        cans = cans + var;
+                        cans = cans + Opti.getResult(stall,prod);;
                         database2.child("Cans distributed").setValue(cans);
                         DataSnapshot dataSnapshot1 = snapshot.child("Cans left");
                         Integer cans1 = dataSnapshot1.getValue(Integer.class);
-                        cans1 = cans1 - var;
+                        cans1 = cans1 - Opti.getResult(stall,prod);;
                         database2.child("Cans left").setValue(cans1);
 
                     }
