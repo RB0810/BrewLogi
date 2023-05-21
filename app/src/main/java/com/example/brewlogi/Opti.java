@@ -30,21 +30,6 @@ public class Opti{
             return random.nextInt(max - min + 1) + min;
         }
 
-    public static ArrayList<Integer> generateFiveRandomNumbers(int targetSum) {
-        Random random = new Random();
-        ArrayList<Integer> randomNumbers = new ArrayList<>(5);
-
-        int currentSum = 0;
-        for (int i = 0; i < 4; i++) {
-            int newNumber = random.nextInt(targetSum - currentSum - (4 - i)) + 1;
-            randomNumbers.add(newNumber);
-            currentSum += newNumber;
-        }
-
-        randomNumbers.add(targetSum - currentSum);
-
-        return randomNumbers;
-    }
 
     public static Map<String, Map<String, Map<String, Integer>>> generateSales(SalesDataCallback salesDataCallBack) {
         DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
@@ -63,13 +48,12 @@ public class Opti{
                             String product = dataSnapshot1.getKey();
                             DataSnapshot dataSnapshot2 = dataSnapshot1.child("Cans distributed");
                             Integer cansDistributed = dataSnapshot2.getValue(Integer.class);
-                            ArrayList<Integer> hours = generateFiveRandomNumbers(cansDistributed);
                             products.put(product, Map.of(
-                                    "hour_1", hours.get(0),
-                                    "hour_2", hours.get(1),
-                                    "hour_3", hours.get(2),
-                                    "hour_4", hours.get(3),
-                                    "hour_5", hours.get(4)
+                                    "hour_1", getRandomInt(100, 130),
+                                    "hour_2", getRandomInt(0, 10),
+                                    "hour_3", getRandomInt(60, 85),
+                                    "hour_4", getRandomInt(0, 7),
+                                    "hour_5", getRandomInt(0, 5)
                             ));
                         }
                         sales.put(stall, products);
