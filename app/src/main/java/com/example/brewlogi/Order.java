@@ -1,5 +1,7 @@
 package com.example.brewlogi;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -102,14 +104,31 @@ public class Order extends AppCompatActivity {
                         Integer bottles = dataSnapshot.getValue(Integer.class);
                         quantity = Integer.parseInt(Quantity.getText().toString()) * bottles;
 
-                        // Move the intent creation and start inside onDataChange
-                        Intent intent1 = new Intent(Order.this, OrderConfirmation.class);
-                        intent1.putExtra("ProductName", beer);
-                        intent1.putExtra("numberValue", Quantity.getText().toString());
-                        intent1.putExtra("Type", type);
-                        intent1.putExtra("Quantity", quantity);
-                        intent1.putExtra("Total Cost", Cost.getText().toString());
-                        startActivity(intent1);
+                        // Create confirmation dialog
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Order.this);
+                        builder.setTitle("Confirm Order")
+                                .setMessage("Are you sure you want to order?\n\n"
+                                        + beer + ", " + type + "\n"
+                                        + "Quantity: " + Quantity.getText().toString() + "\n"
+                                        + "Total Cost: " + Cost.getText().toString())
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Proceed only if user clicks Yes
+                                        Intent intent1 = new Intent(Order.this, OrderConfirmation.class);
+                                        intent1.putExtra("ProductName", beer);
+                                        intent1.putExtra("numberValue", Quantity.getText().toString());
+                                        intent1.putExtra("Type", type);
+                                        intent1.putExtra("Quantity", quantity);
+                                        intent1.putExtra("Total Cost", Cost.getText().toString());
+                                        startActivity(intent1);
+                                    }
+                                })
+                                .setNegativeButton("No", null);
+
+                        // Show the AlertDialog
+                        AlertDialog confirmationDialog = builder.create();
+                        confirmationDialog.show();
                     }
 
                     @Override
