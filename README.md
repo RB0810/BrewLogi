@@ -50,10 +50,10 @@ BrewLogi acknowledges the importance of embracing technology and sustainability.
   </li>
   <li>
     <strong>Rishika Banka</strong>
-    <br>Email:
-    <br>LinkedIn:
-    <br>GitHub:
-    <br>Phone no.:
+    <br>Email: rishika_banka@mymail.sutd.edu.sg
+    <br>LinkedIn: <a href = "http://www.linkedin.com/in/rishikabanka/"> www.linkedin.com/in/rishikabanka/ </a>
+    <br>GitHub: <a href = "https://github.com/RB0810"> github.com/RB0810 </a>
+    <br>Phone no.: +65 88855724
   </li>
   <li>
     <strong>Vanya Jalan</strong>
