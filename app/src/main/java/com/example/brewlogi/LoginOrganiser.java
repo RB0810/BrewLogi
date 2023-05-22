@@ -1,6 +1,7 @@
 package com.example.brewlogi;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,15 +27,22 @@ public class LoginOrganiser extends AppCompatActivity {
         passwordget = findViewById(R.id.password);
         Button loginButton = findViewById(R.id.loginbutton);
 
+        loginButton.setEnabled(true);
+        loginButton.setBackgroundResource(R.drawable.roundedgreen);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loginButton.setEnabled(false);
+                loginButton.setBackgroundResource(R.drawable.roundedsilver);
                 String email = emailget.getText().toString();
                 String password = passwordget.getText().toString();
 
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(LoginOrganiser.this, "Please fill in all fields", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginOrganiser.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    loginButton.setEnabled(true);
+                    loginButton.setBackgroundResource(R.drawable.roundedgreen);
                 } else {
                     auth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(task -> {
@@ -54,6 +62,15 @@ public class LoginOrganiser extends AppCompatActivity {
 
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Button loginButton = findViewById(R.id.loginbutton);
+        loginButton.setEnabled(true);
+        loginButton.setBackgroundResource(R.drawable.roundedgreen);
     }
 }
 
