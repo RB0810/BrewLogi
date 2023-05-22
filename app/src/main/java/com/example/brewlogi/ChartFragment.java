@@ -36,7 +36,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChartFragment extends Fragment {
 
@@ -48,27 +50,55 @@ public class ChartFragment extends Fragment {
 
         DatabaseReference totalStockRef = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Inventory").child("Total Stock");
-
-
-        totalStockRef.addValueEventListener(new ValueEventListener() {
+        totalStockRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<String> entryNames = new ArrayList<>();
-                List<Integer> cansDistributed = new ArrayList<>();
-                List<Integer> cansLeft = new ArrayList<>();
+                HashMap<String, Integer> productsSold = new HashMap<>();
+                HashMap<String, Integer> productsLeft = new HashMap<>();
 
                 for (DataSnapshot entrySnapshot : snapshot.getChildren()) {
-                    String entryName = entrySnapshot.getKey();
-                    int cansDist = entrySnapshot.child("Cans distributed").getValue(Integer.class);
+                    String product = entrySnapshot.getKey();
                     int cansL = entrySnapshot.child("Cans left").getValue(Integer.class);
-
-                    entryNames.add(entryName);
-                    cansDistributed.add(cansDist);
-                    cansLeft.add(cansL);
+                    productsSold.put(product, 0);
+                    productsLeft.put(product, cansL);
                 }
 
-                // Call the bar chart setup method here
-                setupBarChart(entryNames, cansDistributed, cansLeft);
+                System.out.println(productsLeft);
+                System.out.println(productsSold);
+
+                DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        .getReference("Inventory");
+                database.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            String stall = dataSnapshot.getKey();
+                            System.out.println(stall);
+                            if(!stall.equals("Total Stock")){
+                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                    String product = dataSnapshot1.getKey();
+                                    DataSnapshot dataSnapshot2 = dataSnapshot1.child("Cans left");
+                                    productsLeft.put(product, productsLeft.get(product) + dataSnapshot2.getValue(Integer.class));
+                                    System.out.println(productsSold);
+
+                                    DataSnapshot dataSnapshot3 = dataSnapshot1.child("Cans distributed");
+                                    productsSold.put(product, productsSold.get(product) + dataSnapshot3.getValue(Integer.class));
+                                }
+                            }
+
+                        }
+
+                        List<String> entryNames = new ArrayList<>(productsLeft.keySet());
+                        List<Integer> cansLeft = new ArrayList<>(productsLeft.values());
+                        List<Integer> cansDistributed = new ArrayList<>(productsSold.values());
+                        setupBarChart(entryNames, cansDistributed, cansLeft);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Handle the onCancelled event if needed
+                    }
+                });
             }
 
             @Override
@@ -76,6 +106,7 @@ public class ChartFragment extends Fragment {
                 // Handle the onCancelled event if needed
             }
         });
+
 
         DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Inventory");
