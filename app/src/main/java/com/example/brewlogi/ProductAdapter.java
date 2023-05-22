@@ -40,7 +40,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         holder.BeerName.setText(product.getProductName());
         holder.OfferType.setText(product.getType());
-        holder.Cost.setText("$" + String.valueOf(product.getCost()) + ".99");
+        holder.Cost.setText("$" + String.valueOf(product.getCost()));
 
         holder.parentCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +48,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 Intent intent = new Intent(context, Order.class);
                 intent.putExtra("productName", product.getProductName());
                 intent.putExtra("OfferType", product.getType());
-                intent.putExtra("Cost","$" + String.valueOf(product.getCost()) + ".99");
+                intent.putExtra("Cost","$" + String.valueOf(product.getCost()));
                 intent.putExtra("Image", product.getImageResource());
                 context.startActivity(intent);
             }

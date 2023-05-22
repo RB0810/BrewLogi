@@ -10,7 +10,7 @@ public class Product {
     String type;
 
     Boolean isRestocked;
-    int cost;
+    Double cost;
 
     int imageResource;
 
@@ -21,20 +21,13 @@ public class Product {
 
     }
 
-    public Product(String productName, String cansDistributed, String cansLeft, int cost, int imageResource){
-        this.productName = productName;
-        this.cansDistributed = cansDistributed;
-        this.cansLeft = cansLeft;
-        this.cost = cost;
-        this.imageResource = imageResource;
-    }
      Product(String productName, String stallname, Boolean isRestocked) {
         this.productName = productName;
         this.stallname=stallname;
         this.isRestocked=isRestocked;
     }
 
-    Product(String productName, String type, int cost, int imageResource) {
+    Product(String productName, String type, Double cost, int imageResource) {
         this.productName = productName;
         this.cost = cost;
         this.type = type;
@@ -61,7 +54,7 @@ public class Product {
         return cansLeft;
     }
 
-    public int getCost() {
+    public Double getCost() {
         return cost;
     }
 
