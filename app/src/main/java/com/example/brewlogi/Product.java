@@ -7,6 +7,8 @@ public class Product {
     String cansDistributed;
     String cansLeft;
 
+    String type;
+
     Boolean isRestocked;
     int cost;
 
@@ -30,6 +32,17 @@ public class Product {
         this.productName = productName;
         this.stallname=stallname;
         this.isRestocked=isRestocked;
+    }
+
+    Product(String productName, String type, int cost, int imageResource) {
+        this.productName = productName;
+        this.cost = cost;
+        this.type = type;
+        this.imageResource = imageResource;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getStallname() {

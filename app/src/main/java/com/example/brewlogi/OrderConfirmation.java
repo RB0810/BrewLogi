@@ -37,7 +37,9 @@ public class OrderConfirmation extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     private LocationCallback locationCallback;
     private String productName;
-    private int numberValue;
+    private String numberValue;
+    private String type;
+    private Integer quantity;
 
     private Boolean database2Updated = false;
     private double nearestStallLatitude;
@@ -54,9 +56,12 @@ public class OrderConfirmation extends AppCompatActivity {
         locationTextView = findViewById(R.id.location);
 
         Intent intent = getIntent();
-        numberValue = intent.getIntExtra("numberValue", 0);
+        numberValue = intent.getStringExtra("numberValue");
         productName = intent.getStringExtra("ProductName");
-        orderQuantityTextView.setText(String.valueOf(numberValue) + " " + productName + " beer");
+        type = intent.getStringExtra("Type");
+        quantity = intent.getIntExtra("Quantity",0);
+
+        orderQuantityTextView.setText(numberValue + " " + productName + ", "+ type);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -162,11 +167,11 @@ public class OrderConfirmation extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             DataSnapshot dataSnapshot = snapshot.child("Cans distributed");
                             Integer cans = dataSnapshot.getValue(Integer.class);
-                            cans = cans + numberValue;
+                            cans = cans + quantity;
                             database2.child("Cans distributed").setValue(cans);
                             DataSnapshot dataSnapshot1 = snapshot.child("Cans left");
                             Integer cans1 = dataSnapshot1.getValue(Integer.class);
-                            cans1 = cans1 - numberValue;
+                            cans1 = cans1 - quantity;
                             database2.child("Cans left").setValue(cans1);
 
                             // Set the flag to indicate that the database update has been performed

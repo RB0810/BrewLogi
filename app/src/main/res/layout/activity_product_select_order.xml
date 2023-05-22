@@ -5,16 +5,19 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="1"
     android:background="@color/white"
-    tools:context=".PlaceOrder">
+    tools:context=".Order">
+
     <include
         layout="@layout/toolbar"/>
 
-    <TextView
-        android:id="@+id/order"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productRV"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="Order Place" />
+        android:scrollbars="horizontal"
+        android:layout_marginTop="16dp"
+        tools:listitem="@layout/rv_product" />
 
 </LinearLayout>

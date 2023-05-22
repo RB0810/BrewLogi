@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.Collections;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
@@ -27,7 +30,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_product, parent, false);
         return new ProductViewHolder(view);
     }
 
@@ -35,40 +38,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
 
-        holder.productNameTextView.setText(product.getProductName());
+        holder.BeerName.setText(product.getProductName());
+        holder.OfferType.setText(product.getType());
+        holder.Cost.setText("$" + String.valueOf(product.getCost()) + ".99");
 
-        holder.costTextView.setText("$" + String.valueOf(product.getCost()) + ".99"); // Add this
-        holder.productImage.setImageResource(product.getImageResource());
-
-
-
-        holder.minusButton.setOnClickListener(new View.OnClickListener() {
+        holder.parentCard.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Integer number = Integer.parseInt(holder.numberTextView.getText().toString());
-                if (number > 1) {
-                    number--;
-                    holder.numberTextView.setText(String.valueOf(number));
-                }
-            }
-        });
-
-        holder.plusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Integer number = Integer.parseInt(holder.numberTextView.getText().toString());
-                number++;
-                holder.numberTextView.setText(String.valueOf(number));
-            }
-        });
-
-        holder.placeOrderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Integer number = Integer.parseInt(holder.numberTextView.getText().toString());
-                Intent intent = new Intent(context, OrderConfirmation.class);
-                intent.putExtra("numberValue", number);
-                intent.putExtra("ProductName", product.getProductName());
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Order.class);
+                intent.putExtra("productName", product.getProductName());
+                intent.putExtra("OfferType", product.getType());
+                intent.putExtra("Cost","$" + String.valueOf(product.getCost()) + ".99");
+                intent.putExtra("Image", product.getImageResource());
                 context.startActivity(intent);
             }
         });
@@ -84,24 +65,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
 
+        TextView BeerName, OfferType, Cost; // Add costTextView
+        CardView parentCard;
 
-        ImageButton minusButton;
-        ImageButton plusButton;
-        Button placeOrderButton;
-        TextView productNameTextView, cansDistributedTextView, cansLeftTextView, costTextView; // Add costTextView
-        ImageView productImage;
-        TextView numberTextView;
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
-            productNameTextView = itemView.findViewById(R.id.productNameTextView);
-            numberTextView = itemView.findViewById(R.id.numberTextView);
-            minusButton = itemView.findViewById(R.id.minusButton);
-            plusButton = itemView.findViewById(R.id.plusButton);
-            placeOrderButton = itemView.findViewById(R.id.placeOrderButton);
-
-            costTextView = itemView.findViewById(R.id.costTextView); // Add this
-            productImage = itemView.findViewById(R.id.productImage);
-
+            BeerName = itemView.findViewById(R.id.beername_rv);
+            OfferType = itemView.findViewById(R.id.type_rv);
+            Cost = itemView.findViewById(R.id.cost_rv);
+            parentCard = itemView.findViewById(R.id.parentCard);
         }
     }
 }

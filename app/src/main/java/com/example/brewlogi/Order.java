@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,58 +25,94 @@ import java.util.List;
 
 public class Order extends AppCompatActivity {
 
-    private TextView numberTextView;
-    private int number = 1;
-
-    private RecyclerView productRecyclerView;
-    private ProductAdapter productAdapter;
-    private List<Product> productList;
-
+    ImageView image;
+    TextView beerName;
+    TextView OfferType;
+    TextView Cost;
+    ImageButton PlusButton;
+    ImageButton MinusButton;
+    TextView Quantity;
+    Button PlaceOrder;
+    Integer quantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order);
 
+        Intent intent = getIntent();
+        String beer = intent.getStringExtra("productName");
+        String type = intent.getStringExtra("OfferType");
+        String cost = intent.getStringExtra("Cost");
+        Integer image_src = intent.getIntExtra("Image", R.drawable.beer_image);
 
-        productRecyclerView = findViewById(R.id.productRecyclerView);
-        productList = new ArrayList<>();
-        productAdapter = new ProductAdapter(this, productList);
-        productRecyclerView.setAdapter(productAdapter);
-        productRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        image = findViewById(R.id.productImage);
+        beerName = findViewById(R.id.productNameTextView);
+        OfferType = findViewById(R.id.type);
+        Cost = findViewById(R.id.costTextView);
+        PlusButton = findViewById(R.id.plusButton);
+        MinusButton = findViewById(R.id.minusButton);
+        Quantity = findViewById(R.id.numberTextView);
+        PlaceOrder = findViewById(R.id.placeOrderButton);
 
-        DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("Inventory").child("Total Stock");
-        database.addValueEventListener(new ValueEventListener() {
+        image.setImageResource(image_src);
+        beerName.setText(beer);
+        OfferType.setText(type);
+        Cost.setText(cost);
+
+
+        PlusButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    String productName = dataSnapshot.getKey();
-                    DataSnapshot dataSnapshot1 = dataSnapshot.child("Cost");
-                    Integer cost  = dataSnapshot1.getValue(Integer.class);
-                    DataSnapshot dataSnapshot2 = dataSnapshot.child("Cans distributed");
-                    String cansDist = dataSnapshot1.getValue(Integer.class).toString();
-                    DataSnapshot dataSnapshot3 = dataSnapshot.child("Cans left");
-                    String cansLeft = dataSnapshot1.getValue(Integer.class).toString();
-                    productList.add(new Product(productName, cansDist, cansLeft, cost, R.drawable.beer_image));
-                }
-                productAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onClick(View view) {
+                Integer number = Integer.parseInt(Quantity.getText().toString());
+                number++;
+                Quantity.setText(String.valueOf(number));
 
             }
         });
 
+        MinusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Integer number = Integer.parseInt(Quantity.getText().toString());
+                if(number!=1){
+                    number--;
+                    Quantity.setText(String.valueOf(number));
+                }
+            }
+        });
 
+        PlaceOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseReference database = FirebaseDatabase.getInstance("https://hacksingapore-14b13-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        .getReference("Offers").child(type);
+                database.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        DataSnapshot dataSnapshot = snapshot.child("Number");
+                        Integer bottles = dataSnapshot.getValue(Integer.class);
+                        quantity = Integer.parseInt(Quantity.getText().toString()) * bottles;
 
+                        // Move the intent creation and start inside onDataChange
+                        Intent intent1 = new Intent(Order.this, OrderConfirmation.class);
+                        intent1.putExtra("ProductName", beer);
+                        intent1.putExtra("numberValue", Quantity.getText().toString());
+                        intent1.putExtra("Type", type);
+                        intent1.putExtra("Quantity", quantity);
+                        startActivity(intent1);
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
 
 
     }
-
-
 
 
 }

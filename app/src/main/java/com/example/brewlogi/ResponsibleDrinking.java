@@ -22,7 +22,7 @@ public class ResponsibleDrinking extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(check1.isChecked()){
-                    Intent intent = new Intent(ResponsibleDrinking.this, Order.class);
+                    Intent intent = new Intent(ResponsibleDrinking.this, ProductSelectOrder.class);
                     startActivity(intent);
                 }
                 else{
