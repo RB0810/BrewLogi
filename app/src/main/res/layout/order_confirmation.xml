@@ -31,26 +31,29 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:gravity="bottom"
-            android:fontFamily="@font/iowan_bold"
-
-
-            />
-
-
-
-
-
+            android:fontFamily="@font/iowan_bold" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/orderquantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="60px"
+        android:text="default"
+        android:textSize="55px"
         android:textColor="@color/black"
-        android:textStyle="bold"
+        android:textStyle="bold" />
 
-        />
+    <TextView
+        android:id="@+id/ordercost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="default"
+        android:textSize="50px"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
     <ImageView
         android:layout_width="170dp"
         android:layout_height="170dp"

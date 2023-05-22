@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 public class OrderConfirmation extends AppCompatActivity {
 
     private TextView orderQuantityTextView;
+    private TextView orderCost;
     private TextView locationTextView;
 
     private FusedLocationProviderClient fusedLocationClient;
@@ -39,6 +40,7 @@ public class OrderConfirmation extends AppCompatActivity {
     private String productName;
     private String numberValue;
     private String type;
+    private String cost;
     private Integer quantity;
 
     private Boolean database2Updated = false;
@@ -54,14 +56,17 @@ public class OrderConfirmation extends AppCompatActivity {
 
         orderQuantityTextView = findViewById(R.id.orderquantity);
         locationTextView = findViewById(R.id.location);
+        orderCost = findViewById(R.id.ordercost);
 
         Intent intent = getIntent();
         numberValue = intent.getStringExtra("numberValue");
         productName = intent.getStringExtra("ProductName");
         type = intent.getStringExtra("Type");
+        cost = intent.getStringExtra("Total Cost");
         quantity = intent.getIntExtra("Quantity",0);
 
         orderQuantityTextView.setText(numberValue + " " + productName + ", "+ type);
+        orderCost.setText("Total Cost: " + cost);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 

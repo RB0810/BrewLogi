@@ -66,6 +66,10 @@ public class Order extends AppCompatActivity {
             public void onClick(View view) {
                 Integer number = Integer.parseInt(Quantity.getText().toString());
                 number++;
+                double originalCost = Double.parseDouble(cost.replaceAll("[$]", ""));
+                double newCost = originalCost * number;
+                double roundedCost = Math.round(newCost * 100.0) / 100.0;
+                Cost.setText("$" + roundedCost);
                 Quantity.setText(String.valueOf(number));
 
             }
@@ -75,8 +79,12 @@ public class Order extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Integer number = Integer.parseInt(Quantity.getText().toString());
-                if(number!=1){
+                if (number != 1) {
                     number--;
+                    double originalCost = Double.parseDouble(cost.replaceAll("[$]", ""));
+                    double newCost = originalCost * number;
+                    double roundedCost = Math.round(newCost * 100.0) / 100.0;
+                    Cost.setText("$" + roundedCost);
                     Quantity.setText(String.valueOf(number));
                 }
             }
@@ -100,6 +108,7 @@ public class Order extends AppCompatActivity {
                         intent1.putExtra("numberValue", Quantity.getText().toString());
                         intent1.putExtra("Type", type);
                         intent1.putExtra("Quantity", quantity);
+                        intent1.putExtra("Total Cost", Cost.getText().toString());
                         startActivity(intent1);
                     }
 
