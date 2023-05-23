@@ -2,6 +2,8 @@
 
 <img src="ic_launcher-playstore.png" alt="BrewLogi Logo" height = 100p width = 100px>
 
+<p> Here's a video describing our project: <a href="https://youtu.be/hLti-yn6gL0">https://youtu.be/hLti-yn6gL0</a></p>
+
 <h2>Project Summary</h2>
 
 <p>
@@ -64,10 +66,10 @@ BrewLogi acknowledges the importance of embracing technology and sustainability.
   </li>
   <li>
     <strong>Sharanya Seth</strong>
-    <br>Email:
-    <br>LinkedIn:
-    <br>GitHub:
-    <br>Phone no.:
+    <br>Email: sharanya_seth@mymail.sutd.edu.sg
+    <br>LinkedIn: <a href="https://www.linkedin.com/in/sharanyaseth">https://www.linkedin.com/in/sharanyaseth</a>
+    <br>GitHub: <a href="https://github.com/shrons29">https://github.com/shrons29</a>
+    <br>Phone no.: +65 888556401
   </li>
 </ul>
 
