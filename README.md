@@ -138,8 +138,29 @@ Implementing these features will significantly improve the app's functionality, 
 <h3>Tech Stacks Used</h3>
 
 <ul>
-  <li>Android Studio</li>
-  <li>Firebase</li>
-  <li>Figma</li>
-  <li>Canva</li>
+  <li>Language : Java</li>
+  <li>Frontend : Android UI</li>
+  <li>Auth & DB : Firebase (Auth, Realtime DB)</li>
+  <li>Services & APIs : Google Maps</li>
+  <li>Developer Tools : Android Studio, Github(VCS)</li>
 </ul>
+<p>
+  Java is a preferred language for Android app development due to its OOP principles, allowing for reusable and scalable code. It's also platform-independent and has a vast developer community, making it a reliable choice for creating Android apps.
+
+We have been exposed to Firebase before in prior modules, and Firebase integration with Java and Android made the developer experience quite seamless. It was the obvious choice for a backend as it allows us to quickly get up and running, with tools and solutions for every backend aspect for our app. 
+</p>
+
+<h3>Authentication:</h3>
+<ul> 
+ <li>Email/ Password authentication was the default option and allows organisers to create an account specifically for BrewLogi.</li>
+  </ul>
+  <h3>Realtime Database:</h3>
+  <ul>
+<li>It was the ideal choice due to its flexibility, ease of use, and it was also introduced to us during lecture.</li>
+<li>Able to store and sync data in real-time, with event listeners that keeps data up to date on the client — ideal for mobile apps.</li>
+<li>NoSQL database makes it simpler for beginner developers like us to get started as we don’t have to concern ourselves with database schemas and can update entries as we go without updating all tables, simplifying the development process especially when working in a group.</li>
+  </ul>
+  <p>
+BrewLogi makes use of Google Maps to improve the user experience. By using the Google Maps API, the app can access location services, which would allow users to view the location of the stall they need to go to.
+  </p>
+
